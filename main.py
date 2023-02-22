@@ -5,6 +5,7 @@ import speech_recognition as sr
 # import pyttsx3
 import nltk.stem as nt
 from PIL import ImageTk, Image
+from dictionary import dict_of_words
 
 FONT = ("Times New Roman", 20, "normal")
 r = sr.Recognizer()
@@ -35,6 +36,9 @@ def get_audio():
 
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source, duration=0)
+            print("Say something!")
+            # label2 = Label(text="Say Something!")
+            # label2.grid(row=1, column=0)
             audio = r.listen(source)
             my_text = r.recognize_google(audio)
             my_text = my_text.lower()
@@ -76,7 +80,7 @@ def get_audio():
 
     except sr.UnknownValueError:
         print("unknown error occurred")
-        return "Audio Not Recognized. Please try again."
+        return ["Audio Not Recognized. Please try again.", []]
 
 
 def window_reset():
@@ -84,13 +88,13 @@ def window_reset():
         widgets.destroy()
     window.grid_rowconfigure(0, weight=1)
     window.grid_columnconfigure(0, weight=1)
-    button_1 = Button(mainframe, image=mic, bg="white", borderwidth=0.5, command=window2)
-    button_1.grid(row=0, column=1)
+    button_1 = Button(mainframe, image=mic, bg="white", borderwidth=0.5, command=output_window)
+    button_1.grid(row=0, column=0)
     window.grid_rowconfigure(1, weight=1)
     window.grid_columnconfigure(1, weight=1)
 
 
-def window2():
+def output_window():
     global count
 
     def go_next():
@@ -116,8 +120,10 @@ def window2():
         widgets.destroy()
     user_input = get_audio()
     my_text = user_input[0]
+    my_text = my_text.capitalize()
     keywords = user_input[1]
-    image_list = [cat, mic, nice_cat]
+    image_list = [data_dict[keyword] for keyword in keywords if keyword in data_dict]
+
     canvas = Canvas(mainframe, width=400, height=400)
     try:
         image_of_canvas = canvas.create_image(200, 200, image=image_list[count])
@@ -154,7 +160,7 @@ window.minsize(width=750, height=750)
 window.config(padx=20, pady=20)
 mainframe = Frame(window, width=700, height=700)
 mainframe.grid(row=0, column=0, rowspan=4, columnspan=4)
-# mic = PhotoImage(file="new_mic.png")
+# mic = PhotoImage(file="new_mic.png") -
 mic = ImageTk.PhotoImage(Image.open("new_mic.png"))
 cat = ImageTk.PhotoImage(Image.open("cat.jpg"))
 nice_cat = ImageTk.PhotoImage(Image.open("small_nice_cat.png"))
@@ -163,9 +169,8 @@ nice_cat = ImageTk.PhotoImage(Image.open("small_nice_cat.png"))
 left_arrow = PhotoImage(file="left_arrow_final.png").subsample(2, 2)
 right_arrow = PhotoImage(file="right_arrow_final.png").subsample(2, 2)
 error = ImageTk.PhotoImage(Image.open("error.jfif"))
+
+data_dict = {keyword: ImageTk.PhotoImage(Image.open(image)) for keyword, image in dict_of_words.items()}
+
 window_reset()
-
-# for keyword, image in dict_to_words:
-#     keyword_image = ImageTk.PhotoImage(Image.open(image))
-
 window.mainloop()
