@@ -8,6 +8,7 @@ from PIL import ImageTk, Image
 from dictionary import dict_of_words
 
 FONT = ("Times New Roman", 20, "normal")
+FONT2 = ("Times New Roman", 25, "bold")
 r = sr.Recognizer()
 count = 0
 # def speaktext(command):
@@ -104,6 +105,7 @@ def output_window():
         except IndexError:
             right_button.config(state="disabled")
         left_button.config(state="active")
+        word_label.config(text=word_list[count])
         canvas.itemconfig(image_of_canvas, image=image_list[count])
 
     def go_prev():
@@ -112,7 +114,11 @@ def output_window():
         if count == 0:
             left_button.config(state="disabled")
         right_button.config(state="active")
+        word_label.config(text=word_list[count])
         canvas.itemconfig(image_of_canvas, image=image_list[count])
+
+    def closer():
+        window.destroy()
 
     for widgets in mainframe.winfo_children():
         widgets.destroy()
@@ -120,14 +126,17 @@ def output_window():
     my_text = user_input[0]
     my_text = my_text.capitalize()
     keywords = user_input[1]
+    word_list = [keyword for keyword in keywords if keyword in data_dict]
     image_list = [data_dict[keyword] for keyword in keywords if keyword in data_dict]
-
     canvas = Canvas(mainframe, width=400, height=400)
     try:
         image_of_canvas = canvas.create_image(200, 200, image=image_list[count])
+        word_label = Label(mainframe, text=word_list[count], font=FONT2)
     except IndexError:
+        word_label = Label(mainframe, text="NULL", font=FONT2)
         image_of_canvas = canvas.create_image(200, 200, image=error)
     canvas.grid(row=0, column=1, padx=10, pady=10)
+    word_label.grid(row=1, column=1, padx=10, pady=10)
     left_button = Button(mainframe, command=go_prev, image=left_arrow, bg="white", borderwidth=0, state="disabled")
     left_button.grid(row=0, column=0, padx=10, pady=10)
     right_button = Button(mainframe, command=go_next, image=right_arrow, bg="white", borderwidth=0)
@@ -137,6 +146,7 @@ def output_window():
         right_button.config(state="active")
     except IndexError:
         right_button.config(state="disabled")
+
     textbox = Text(mainframe, font=FONT, padx=20, pady=20, width=3, height=3)
     textbox.insert(END, "Say Something")
 
@@ -145,11 +155,13 @@ def output_window():
 
     textbox.delete("1.0", END)
     textbox.insert(END, my_text)
-    textbox.grid(row=1, column=0, columnspan=3, sticky="EW")
+    textbox.grid(row=2, column=0, columnspan=3, sticky="EW")
     repeat_button = Button(mainframe, text="Try Again.", command=window_reset)
     repeat_button.config(padx=5, pady=5)
-    repeat_button.grid(row=2, column=1, padx=20, pady=20, sticky="EW")
-
+    repeat_button.grid(row=3, column=0, columnspan=2, padx=20, pady=20, sticky="EW")
+    close_button = Button(mainframe, text="Exit", command=closer)
+    close_button.config(padx=5, pady=5)
+    close_button.grid(row=3, column=2, padx=20, pady=20, sticky="EW")
 
 new_size = (300, 300)
 window = Tk()
