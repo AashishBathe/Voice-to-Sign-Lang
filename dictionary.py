@@ -1,11 +1,56 @@
-from PIL import ImageTk, Image
-
 dict_of_words = {
-    "mic": "new_mic.png",
-    "cat": "cat.jpg"
+    "eat": "images/eat.png",
+    "drink": "images/drink.png",
+    "washroom": "images/bathroom.png",
+    "sleep": "images/sleep.png",
+    "yes": "images/yes.png",
+    "no": "images/no.png",
+    "sorry": "images/sorry.png",
+    # "please": "images/please.png",
+    "thanks": "images/thanks.png",
+    "welcome": "images/welcome.png",
+    # "watch": "images/watch.png",
+    "study": "images/study.png",
+    "travel": "images/travel.png",
+    "party": "images/party.png",
+    "pray": "images/pray.png",
+    "pay": "images/pay.png",
+    "go": "images/go.png",
+    "how": "images/how.png",
+    "what": "images/what.png",
+    "why": "images/why.png",
+    "where": "images/where.png",
+    # "free": "images/free.png",
+    "when": "images/when.png",
+    "work": "images/work.png",
+    "busy": "images/busy.png",
+    "elephant": "images/elephant.png",
+    "box": "images/box.png",
+    "ten": "images/ten.png",
+    "little": "images/little.png",
+    "laugh": "images/laugh.png",
+    "close": "images/close.png",
+    "open": "images/open.png",
+    "phone": "images/phone.png",
+    "write": "images/write.png",
+    "beautiful": "images/beautiful.png",
+    "family": "images/family.png",
+    "read": "images/read.png",
+    "tomorrow": "images/tomorrow.png",
+    "flower": "images/flower.png",
+    "fish": "images/fish.png",
+    "pain": "images/pain.png",
+    "sit": "images/sit.png",
+    "talk": "images/talk.png",
+    "ball": "images/ball.png",
+    "good": "images/good.png",
+    "house": "images/house.png",
+    "today": "images/today.png",
+    "seat": "images/sit.png",
+    "enjoy": "images/enjoy.png",
 }
 
-# for keyword, image in dict_for_words.items():
-#     dict_to_images[keyword] = ImageTk.PhotoImage(Image.open(image))
+# keys = list(dict_of_words.keys())
+# keys.sort()
+# print(keys)
 
-# dict_of_images = {keyword: ImageTk.PhotoImage(Image.open(image)) for keyword, image in dict_of_words.items()}

@@ -160,7 +160,6 @@ window.minsize(width=750, height=750)
 window.config(padx=20, pady=20)
 mainframe = Frame(window, width=700, height=700)
 mainframe.grid(row=0, column=0, rowspan=4, columnspan=4)
-# mic = PhotoImage(file="new_mic.png") -
 mic = ImageTk.PhotoImage(Image.open("new_mic.png"))
 cat = ImageTk.PhotoImage(Image.open("cat.jpg"))
 nice_cat = ImageTk.PhotoImage(Image.open("small_nice_cat.png"))
