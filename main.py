@@ -35,10 +35,8 @@ def get_audio():
         l_stem = nt.LancasterStemmer()
 
         with sr.Microphone() as source:
-            r.adjust_for_ambient_noise(source, duration=0)
-            print("Say something!")
-            # label2 = Label(text="Say Something!")
-            # label2.grid(row=1, column=0)
+            # r.adjust_for_ambient_noise(source, duration=0)
+            # print("Say something!")
             audio = r.listen(source)
             my_text = r.recognize_google(audio)
             my_text = my_text.lower()
