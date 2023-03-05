@@ -135,12 +135,12 @@ def output_window():
     except IndexError:
         word_label = Label(mainframe, text="NULL", font=FONT2)
         image_of_canvas = canvas.create_image(200, 200, image=error)
-    canvas.grid(row=0, column=1, padx=10, pady=10)
-    word_label.grid(row=1, column=1, padx=10, pady=10)
+    canvas.grid(row=0, column=1, columnspan=2, padx=10, pady=10)
+    word_label.grid(row=1, column=1, columnspan=2, padx=10, pady=10)
     left_button = Button(mainframe, command=go_prev, image=left_arrow, bg="white", borderwidth=0, state="disabled")
     left_button.grid(row=0, column=0, padx=10, pady=10)
     right_button = Button(mainframe, command=go_next, image=right_arrow, bg="white", borderwidth=0)
-    right_button.grid(row=0, column=2, padx=10, pady=10)
+    right_button.grid(row=0, column=3, padx=10, pady=10)
     try:
         image_list[count+1]
         right_button.config(state="active")
@@ -155,13 +155,14 @@ def output_window():
 
     textbox.delete("1.0", END)
     textbox.insert(END, my_text)
-    textbox.grid(row=2, column=0, columnspan=3, sticky="EW")
+    textbox.grid(row=2, column=0, columnspan=4, sticky="EW")
     repeat_button = Button(mainframe, text="Try Again.", command=window_reset)
     repeat_button.config(padx=5, pady=5)
     repeat_button.grid(row=3, column=0, columnspan=2, padx=20, pady=20, sticky="EW")
     close_button = Button(mainframe, text="Exit", command=closer)
     close_button.config(padx=5, pady=5)
-    close_button.grid(row=3, column=2, padx=20, pady=20, sticky="EW")
+    close_button.grid(row=3, column=2,columnspan=2, padx=20, pady=20, sticky="EW")
+
 
 new_size = (300, 300)
 window = Tk()
