@@ -19,15 +19,8 @@ count = 0
 
 
 def get_audio():
-
-    # string = "i, me, my, myself, we, our, ours, ourselves, you, your, yours, yourself, yourselves, he,him,his,
-    # " \ "himself,she,her,hers,herself,it,its,itself,they,them,their,theirs,themselves,what,which,who,whom,
-    # " \ "this,that,these,those,am,is,are,was,were,be,been,being,have,has,had,having,do,does,did,doing,a,an,the,
-    # " \ "and,but,if,or,because,as,until,while,of,at,by,for,with,about,against,between,into,through,during,
-    # " \ "before,after,above,below,to,from,up,down,in,out,on,off,over,under,again,further,then,once,here,there" \ ",
-    # when,where,why,how,all,any,both,each,few,more,most,other,some,such,no,nor,not,only,own,same,so,than," \ "too,
-    # very,s,t,can,will,just,don,should,now"
-
+    global count
+    count = 0
     with open("stopwords.txt") as file:
         string = file.read()
     stop_words = string.split(',')
@@ -63,8 +56,6 @@ def get_audio():
         #     print("Sorry! could not recognize what you said")
 
         with sr.Microphone() as source:
-            r.adjust_for_ambient_noise(source, duration=0)
-            print("Say something!")
             audio = r.listen(source)
 
         try:
@@ -105,7 +96,7 @@ def output_window():
         except IndexError:
             right_button.config(state="disabled")
         left_button.config(state="active")
-        word_label.config(text=word_list[count])
+        word_label.config(text=word_list[count].capitalize())
         canvas.itemconfig(image_of_canvas, image=image_list[count])
 
     def go_prev():
@@ -128,12 +119,12 @@ def output_window():
     keywords = user_input[1]
     word_list = [keyword for keyword in keywords if keyword in data_dict]
     image_list = [data_dict[keyword] for keyword in keywords if keyword in data_dict]
-    canvas = Canvas(mainframe, width=400, height=400)
+    canvas = Canvas(mainframe, width=400, height=400, bg="#C1C1FF", borderwidth=0, highlightthickness=0)
     try:
         image_of_canvas = canvas.create_image(200, 200, image=image_list[count])
-        word_label = Label(mainframe, text=word_list[count], font=FONT2)
+        word_label = Label(mainframe, text=word_list[count].capitalize(), font=FONT2, bg="#C1C1FF", fg="#22228B")
     except IndexError:
-        word_label = Label(mainframe, text="NULL", font=FONT2)
+        word_label = Label(mainframe, text="ERROR!!", font=FONT2, bg="#C1C1FF", fg='#22228B')
         image_of_canvas = canvas.create_image(200, 200, image=error)
     canvas.grid(row=0, column=1, columnspan=2, padx=10, pady=10)
     word_label.grid(row=1, column=1, columnspan=2, padx=10, pady=10)
@@ -168,19 +159,17 @@ new_size = (300, 300)
 window = Tk()
 window.title("SPEECH TO SIGN LANGUAGE CONVERTER")
 window.minsize(width=750, height=750)
-window.config(padx=20, pady=20)
-mainframe = Frame(window, width=700, height=700)
+window.config(padx=20, pady=20, bg="#C1C1FF")
+mainframe = Frame(window, width=700, height=700, bg="#C1C1FF")
 mainframe.grid(row=0, column=0, rowspan=4, columnspan=4)
-mic = ImageTk.PhotoImage(Image.open("new_mic.png"))
-cat = ImageTk.PhotoImage(Image.open("cat.jpg"))
-nice_cat = ImageTk.PhotoImage(Image.open("small_nice_cat.png"))
-# nice_cat = ImageTk.PhotoImage(file=Image.open("nice_cat.jpg").resize(new_size))
-# small_mic = mic.subsample(1, 1)
 left_arrow = PhotoImage(file="left_arrow_final.png").subsample(2, 2)
 right_arrow = PhotoImage(file="right_arrow_final.png").subsample(2, 2)
 error = ImageTk.PhotoImage(Image.open("error.jfif"))
-
+mic = ImageTk.PhotoImage(Image.open("new_mic.png"))
 data_dict = {keyword: ImageTk.PhotoImage(Image.open(image)) for keyword, image in dict_of_words.items()}
 
 window_reset()
 window.mainloop()
+
+# Eat, sleep, travel and do it again
+#
