@@ -71,6 +71,28 @@ dict_of_words = {
     "any": "images/any.jpg",
     "few": "images/few.jpg",
     "be": "images/be.jpg",
+    "play": "images/play.jpg",
+    "boy": "images/boy.jpg",
+    "child": "images/child.jpg",
+    "country": "images/country.jpg",
+    "girl": "images/girl.jpg",
+    "group": "images/group.jpg",
+    "last": "images/last.jpg",
+    "leave": "images/leave.jpg",
+    "man": "images/man.jpg",
+    "old": "images/old.jpg",
+    "people": "images/people.jpg",
+    "place": "images/place.jpg",
+    "planet": "images/planet.jpg",
+    "problem": "images/problem.jpg",
+    "school": "images/school.jpg",
+    "start": "images/start.jpg",
+    "state": "images/state.jpg",
+    "student": "images/student.jpg",
+    "teacher": "images/teacher.jpg",
+    "woman": "images/woman.jpg",
+    "world": "images/world.jpg",
+    "year": "images/year.jpg"
 }
 
 # keys = list(dict_of_words.keys())

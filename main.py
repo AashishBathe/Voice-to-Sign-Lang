@@ -1,8 +1,7 @@
-# Speech to Text
+# Speech to Sign Language Converter
 
 from tkinter import *
 import speech_recognition as sr
-# import pyttsx3
 import nltk.stem as nt
 from PIL import ImageTk, Image
 from dictionary import dict_of_words
@@ -11,11 +10,6 @@ FONT = ("Times New Roman", 20, "normal")
 FONT2 = ("Times New Roman", 25, "bold")
 r = sr.Recognizer()
 count = 0
-# def speaktext(command):
-#     # Initialize the engine
-#     engine = pyttsx3.init()
-#     engine.say(command)
-#     engine.runAndWait()
 
 
 def get_audio():
@@ -37,8 +31,6 @@ def get_audio():
             text_list = my_text.split(" ")
             stem_list = []
 
-            # lemma = wordnet.WordNetLemmatizer()
-            # word_list = [lemma.lemmatize(word) for word in text_list if word not in stop_words]
             word_list = [word for word in text_list if word not in stop_words]
             for word in word_list:
                 if p_stem.stem(word) == word:
@@ -48,12 +40,6 @@ def get_audio():
             return [my_text, stem_list]
 
     except sr.RequestError:
-        # for phrase in LiveSpeech():
-        #     # here the result is stored in phrase which
-        #     # ultimately displays all the words recognized
-        #     print(phrase)
-        # else:
-        #     print("Sorry! could not recognize what you said")
 
         with sr.Microphone() as source:
             audio = r.listen(source)
@@ -62,7 +48,6 @@ def get_audio():
             print("Did you say '" + r.recognize_sphinx(audio) + "'")
 
         except sr.UnknownValueError:
-            # If the voice is unclear
             print("Could not understand")
 
         except sr.RequestError as e:
@@ -141,9 +126,6 @@ def output_window():
     textbox = Text(mainframe, font=FONT, padx=20, pady=20, width=3, height=3)
     textbox.insert(END, "Say Something")
 
-    # for word in keywords if word in dict_to_image:
-    #     image_list.append(dict_to_image[word])
-
     textbox.delete("1.0", END)
     textbox.insert(END, my_text)
     textbox.grid(row=2, column=0, columnspan=4, sticky="EW")
@@ -172,4 +154,3 @@ window_reset()
 window.mainloop()
 
 # Eat, sleep, travel and do it again
-#
