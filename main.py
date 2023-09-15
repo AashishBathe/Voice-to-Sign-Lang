@@ -63,8 +63,15 @@ def window_reset():
         widgets.destroy()
     window.grid_rowconfigure(0, weight=1)
     window.grid_columnconfigure(0, weight=1)
+    canvas1 = Canvas(mainframe, width=200, height=200, bg="#C1C1FF", borderwidth=0, highlightthickness=0)
+    canvas1.create_image(100, 100, image=logo)
+    canvas1.grid(row=0, column=0, padx=20, pady=30)
+    title_text = Label(mainframe, text="Speech To Sign \nLanguage Converter", font=FONT2, bg='#C1C1FF', fg="#01afb0")
+    title_text.grid(row=0, column=1, padx=10, pady=10)
     button_1 = Button(mainframe, image=mic, bg="white", borderwidth=0.5, command=output_window)
-    button_1.grid(row=0, column=0)
+    button_1.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+    info_text = Label(mainframe, text="Click on the Mic button to talk", font=FONT2, bg='#C1C1FF', fg="black")
+    info_text.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
     window.grid_rowconfigure(1, weight=1)
     window.grid_columnconfigure(1, weight=1)
 
@@ -137,17 +144,17 @@ def output_window():
     close_button.grid(row=3, column=2,columnspan=2, padx=20, pady=20, sticky="EW")
 
 
-new_size = (300, 300)
 window = Tk()
 window.title("SPEECH TO SIGN LANGUAGE CONVERTER")
 window.minsize(width=750, height=750)
-window.config(padx=20, pady=20, bg="#C1C1FF")
+window.config(padx=10, pady=10, bg="#C1C1FF")
 mainframe = Frame(window, width=700, height=700, bg="#C1C1FF")
 mainframe.grid(row=0, column=0, rowspan=4, columnspan=4)
 left_arrow = PhotoImage(file="left_arrow_final.png").subsample(2, 2)
 right_arrow = PhotoImage(file="right_arrow_final.png").subsample(2, 2)
 error = ImageTk.PhotoImage(Image.open("error.jfif"))
 mic = ImageTk.PhotoImage(Image.open("new_mic.png"))
+logo = ImageTk.PhotoImage(Image.open("logo_final.png"))
 data_dict = {keyword: ImageTk.PhotoImage(Image.open(image)) for keyword, image in dict_of_words.items()}
 
 window_reset()
